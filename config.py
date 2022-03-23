@@ -7,30 +7,23 @@ from enum import Enum
 PARSE_LIST = [
     # 66 代理：http://www.66ip.cn/index.html
     {
-        'urls': ['http://www.66ip.cn/{}.html'.format(n for n in ['index'] + list(range(2, 6)))],
+        'urls': ['http://www.66ip.cn/%s.html' % n for n in ['index'] + list(range(2, 6))],
         'type': '66ip',
         'pattern': './/*[@id="main"]/div[1]/div[2]/div[1]/table/tr[position()>1]',
         'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[3]', 'type': './td[4]'}
     },
-    # proxy_list：https://proxy-list.org/english/index.php
+    # hidemy.name；https://hidemy.name/cn/proxy-list/ 需要翻墙
     # {
-    #     'urls': ['https://proxy-list.org/english/index.php?p={}'.format(n for n in range(1, 6))],
-    #     'type': 'proxy_list',
-    #     'pattern': './/*[@id="proxy-table"]/div[2]/div/ul',
-    #     'position': {'ip': './li[1]', 'port': './li[1]', 'city': './li[5]/div/span[1]/span', 'type': './td[2]'}
+    #     'urls': ['https://hidemy.name/cn/proxy-list/#list'] + ['https://hidemy.name/cn/proxy-list/?start=%s#list' % int(n*64) for n in range(1, 5)],
+    #     'type': 'hide',
+    #     'pattern': './html/body/div[1]/div[4]/div/div[4]/table/tbody/tr',
+    #     'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[3]', 'type': './td[5]'}
     # },
-    # hidemy.name；https://hidemy.name/cn/proxy-list/
+    # # 快代理：https://www.kuaidaili.com/free/inha/1/
     {
-        'urls': ['https://hidemy.name/cn/proxy-list/#list', 'https://hidemy.name/cn/proxy-list/{}#list'.format(n*64 for n in range(1, 5))],
-        'type': 'hide',
-        'pattern': './html/body/div[1]/div[4]/div/div[4]/table/tbody/tr',
-        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[3]', 'type': './td[5]'}
-    },
-    # 快代理：https://www.kuaidaili.com/free/inha/1/
-    {
-        'urls': ['https://www.kuaidaili.com/free/inha/{}/'.format(n for n in range(1, 6))],
-        'type': 'kuaidaili',
-        'pattern': './/*[@id="list"]/table/tbody/tr',
+        'urls': ['https://www.kuaidaili.com/free/inha/%s/' % n for n in range(1, 6)],
+        'type': 'kuai_dai_li',
+        'pattern': '//*[@id="list"]/table/tbody/tr',
         'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
     }
 ]
@@ -76,9 +69,10 @@ USER_AGENTS = [
 ]
 
 TEST_IP = 'http://httpbin.org/ip'
+GEVENT_POOL = 5
 
 
 class ParseType(Enum):
-    IP = '66IP'
-    HIDE = 'HIDE'
-    KUAIDAILI = 'KUAIDAILI'
+    IP = '66ip'
+    HIDE = 'hide'
+    KUAI_DAI_LI = 'kuai_dai_li'
