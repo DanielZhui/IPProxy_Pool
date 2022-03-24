@@ -69,6 +69,8 @@ USER_AGENTS = [
 ]
 
 TEST_IP = 'http://httpbin.org/ip'
+# baidu url 作为测试 IP 代理延迟
+TEST_URL = 'https://www.baidu.com'
 GEVENT_POOL = 5
 
 
