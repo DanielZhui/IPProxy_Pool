@@ -3,6 +3,7 @@ from time import sleep
 import config
 from spider.html_downloader import HtmlDownload
 from spider.html_parse import HtmlParse
+from db_helper.mongo_db import MongoHelper
 from utils.validator import check_proxy_list
 
 
@@ -15,6 +16,9 @@ class CrawlProxy(object):
             proxy_list = self.start_crawl(parse)
             validated_proxy_list = check_proxy_list(proxy_list)
             result = result + validated_proxy_list
+        print(result)
+        sql_helper = MongoHelper()
+        sql_helper.insert_many(result)
         return result
 
     def start_crawl(self, parse):

@@ -33,4 +33,4 @@ def _check_proxy(proxy):
             return False, 0, 0
     except Exception as e:
         print('IP: {} Port: {} error: {}'.format(ip, port, e))
-        return False, 0
+        return False, 0, 0
