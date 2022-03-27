@@ -28,7 +28,7 @@ def check_proxy_list(self_ip, proxy_list):
             'city': city,
             'type': type,
             'protocol': protocol,
-            'speed': speed,
+            'speed': '{}ms'.format(speed),
             'verify_time': verify_time
         }
         validated_proxy_list.append(result)
