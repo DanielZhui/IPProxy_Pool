@@ -19,9 +19,16 @@ PARSE_LIST = [
     #     'pattern': './html/body/div[1]/div[4]/div/div[4]/table/tbody/tr',
     #     'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[3]', 'type': './td[5]'}
     # },
-    # # 快代理：https://www.kuaidaili.com/free/inha/1/
+    # 快代理：https://www.kuaidaili.com/free/inha/1/
     {
         'urls': ['https://www.kuaidaili.com/free/inha/%s/' % n for n in range(1, 6)],
+        'type': 'kuai_dai_li',
+        'pattern': '//*[@id="list"]/table/tbody/tr',
+        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
+    },
+    # 快代理：透明
+    {
+        'urls': ['https://www.kuaidaili.com/free/intr/%s/' % n for n in range(1, 6)],
         'type': 'kuai_dai_li',
         'pattern': '//*[@id="list"]/table/tbody/tr',
         'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
@@ -68,10 +75,9 @@ USER_AGENTS = [
     "Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10"
 ]
 
-TEST_IP = 'http://httpbin.org/ip'
-# baidu url 作为测试 IP 代理延迟
-TEST_URL = 'https://www.baidu.com'
-GEVENT_POOL = 5
+HTTP_TEST_IP = 'http://httpbin.org/ip'
+HTTPS_TEST_IP = 'https://httpbin.org/ip'
+REQUEST_TIME_OUT = 5
 
 
 class ParseType(Enum):
