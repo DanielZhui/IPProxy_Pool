@@ -16,5 +16,4 @@ if __name__ == '__main__':
     proxy_list = []
     while not result_q.empty():
         result = result_q.get()
-        process_list += result
-    print('process_list>>>', process_list)
+        proxy_list += result

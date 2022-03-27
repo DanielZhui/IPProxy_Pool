@@ -24,14 +24,14 @@ PARSE_LIST = [
         'urls': ['https://www.kuaidaili.com/free/inha/%s/' % n for n in range(1, 6)],
         'type': 'kuai_dai_li',
         'pattern': '//*[@id="list"]/table/tbody/tr',
-        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
+        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[3]'}
     },
     # 快代理：透明
     {
         'urls': ['https://www.kuaidaili.com/free/intr/%s/' % n for n in range(1, 6)],
         'type': 'kuai_dai_li',
         'pattern': '//*[@id="list"]/table/tbody/tr',
-        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
+        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[3]'}
     }
 ]
 

@@ -15,11 +15,11 @@ def check_proxy_list(self_ip, proxy_list):
         if not http and not https:
             continue
         if http:
-            protocol = 'http'
+            protocol = 'HTTP'
             speed = http_speed
             verify_time = http_verify_time
         else:
-            protocol = 'https'
+            protocol = 'HTTPS'
             speed = https_speed
             verify_time = https_verify_time
         result = {
