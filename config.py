@@ -79,6 +79,12 @@ HTTP_TEST_IP = 'http://httpbin.org/ip'
 HTTPS_TEST_IP = 'https://httpbin.org/ip'
 REQUEST_TIME_OUT = 5
 
+MONGO_CONFIG = {
+    'ip': '127.0.0.1',
+    'port': 27017,
+    'db': 'proxy'
+}
+
 
 class ParseType(Enum):
     IP = '66ip'

@@ -1,5 +1,6 @@
 from spider.crawl import CrawlProxy
 from multiprocessing import Queue, Process
+from db_helper.mongo_db import MongoHelper
 
 from config import PARSE_LIST
 
@@ -17,3 +18,5 @@ if __name__ == '__main__':
     while not result_q.empty():
         result = result_q.get()
         proxy_list += result
+    db_helper = MongoHelper()
+    db_helper.insert_many(proxy_list)
