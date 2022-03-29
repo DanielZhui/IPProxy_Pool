@@ -44,14 +44,21 @@
                               <td>{{proxy.verify_time}}</td>
                               <td>
                                   <button type="button" class="btn btn-default" aria-label="Left Align">
-                                      <span class="glyphicon glyphicon-paste" aria-hidden="true"></span>
+                                      <span class="glyphicon glyphicon-paste" aria-hidden="true" onclick="copyProxy('{{proxy.ip}}', '{{proxy.port}}')"></span>
                                   </button>
                               </td>
                           </tr>
                       {% endfor %}
-                </tbody>
+                    </tbody>
               </table>
         </div>
     </div>
 </body>
+<script type="text/javascript">
+    function copyProxy(ip, port) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(`${ip}:${port}`)
+        }
+    }
+</script>
 </html>
