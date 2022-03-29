@@ -1,9 +1,12 @@
 from pymongo import MongoClient
+from config import MONGO_CONFIG
 
 
 class MongoHelper(object):
     def __init__(self):
-        self.client = MongoClient(host='127.0.0.1', port=27017, username='root', password='admin', authSource='test')
+        self.client = MongoClient(
+            host=MONGO_CONFIG.get('host', '127.0.0.1'), port=MONGO_CONFIG.get('port', 27017), authSource=MONGO_CONFIG.get('db', 'proxy')
+        )
         self.init_db()
 
     def serializer(self, proxys):
@@ -11,8 +14,8 @@ class MongoHelper(object):
             p['_id'] = str(p.get('_id'))
 
     def init_db(self):
-        self.db = self.client.test
-        self.collection = self.db.proxys
+        self.db = self.client[MONGO_CONFIG.get('db', 'proxy')]
+        self.collection = self.db[MONGO_CONFIG.get('collection', 'proxys')]
 
     def insert_one(self, obj):
         if obj:

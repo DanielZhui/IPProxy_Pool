@@ -1,6 +1,6 @@
 import os
 import sys
-from flask import Flask, jsonify
+from flask import Flask, render_template
 
 base_dir = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, base_dir)
@@ -12,7 +12,8 @@ app = Flask(__name__)
 def get_proxys():
     db = MongoHelper()
     result = db.find_all()
-    return jsonify(result)
+    data = {'proxys': result}
+    return render_template('index.html', **data)
 
 
 if __name__ == '__main__':

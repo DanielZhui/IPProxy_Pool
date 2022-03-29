@@ -15,11 +15,11 @@ def check_proxy_list(self_ip, proxy_list):
         if not http and not https:
             continue
         if http:
-            protocol = 'http'
+            protocol = 'HTTP'
             speed = http_speed
             verify_time = http_verify_time
         else:
-            protocol = 'https'
+            protocol = 'HTTPS'
             speed = https_speed
             verify_time = https_verify_time
         result = {
@@ -28,7 +28,7 @@ def check_proxy_list(self_ip, proxy_list):
             'city': city,
             'type': type,
             'protocol': protocol,
-            'speed': speed,
+            'speed': '{}ms'.format(speed),
             'verify_time': verify_time
         }
         validated_proxy_list.append(result)
@@ -56,3 +56,15 @@ def _check_proxy(self_ip, proxy, http=True):
     except Exception as e:
         print('proxy: {} test error: {}'.format(proxy, e))
         return False, 0, 0
+
+
+def check_repeat_proxy(proxy_list):
+    proxy_set = set()
+    result = []
+    # 数据去重
+    for p in proxy_list:
+        proxy = '{}:{}'.format(p.get('ip'), p.get('port'))
+        if proxy not in proxy_set:
+            proxy_set.add(proxy)
+            result.append(p)
+    return list(result)
