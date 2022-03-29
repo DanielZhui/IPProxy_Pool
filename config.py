@@ -82,7 +82,8 @@ REQUEST_TIME_OUT = 5
 MONGO_CONFIG = {
     'ip': '127.0.0.1',
     'port': 27017,
-    'db': 'proxy'
+    'db': 'proxy',
+    'collection': 'proxys'
 }
 
 

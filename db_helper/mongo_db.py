@@ -14,8 +14,8 @@ class MongoHelper(object):
             p['_id'] = str(p.get('_id'))
 
     def init_db(self):
-        self.db = self.client.test
-        self.collection = self.db.proxys
+        self.db = self.client[MONGO_CONFIG.get('db', 'proxy')]
+        self.collection = self.db[MONGO_CONFIG.get('collection', 'proxys')]
 
     def insert_one(self, obj):
         if obj:
