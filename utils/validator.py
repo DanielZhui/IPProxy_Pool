@@ -56,3 +56,15 @@ def _check_proxy(self_ip, proxy, http=True):
     except Exception as e:
         print('proxy: {} test error: {}'.format(proxy, e))
         return False, 0, 0
+
+
+def check_repeat_proxy(proxy_list):
+    proxy_set = set()
+    result = []
+    # 数据去重
+    for p in proxy_list:
+        proxy = '{}:{}'.format(p.get('ip'), p.get('port'))
+        if proxy not in proxy_set:
+            proxy_set.add(proxy)
+            result.append(p)
+    return list(result)
