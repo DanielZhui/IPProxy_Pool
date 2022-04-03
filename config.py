@@ -1,3 +1,4 @@
+import os
 from enum import Enum
 
 '''
@@ -80,7 +81,7 @@ HTTPS_TEST_IP = 'https://httpbin.org/ip'
 REQUEST_TIME_OUT = 5
 
 MONGO_CONFIG = {
-    'ip': '127.0.0.1',
+    'ip': '127.0.0.1' if not os.getenv('ENV') else 'mongodb',
     'port': 27017,
     'db': 'proxy',
     'collection': 'proxys'

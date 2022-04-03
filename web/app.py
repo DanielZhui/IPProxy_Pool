@@ -15,7 +15,6 @@ app.add_template_filter(format_time, 'format_time')
 
 @app.route('/home', methods=['GET'])
 def home():
-    db = MongoHelper()
     options = get_find_options()
     result = db.find_all(options)
     data = {'proxys': result}
@@ -24,7 +23,6 @@ def home():
 
 @app.route('/api/proxys', methods=['GET'])
 def get_proxys():
-    db = MongoHelper()
     options = get_find_options()
     result = db.find_all(options)
     return jsonify(result)
@@ -33,9 +31,9 @@ def get_proxys():
 if __name__ == '__main__':
     from db_helper.mongo_db import MongoHelper
     from conf import Config
+    db = MongoHelper()
     app.config.from_object(Config)
     scheduler = APScheduler()
     scheduler.init_app(app)
     scheduler.start()
-
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
