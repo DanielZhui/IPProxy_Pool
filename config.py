@@ -1,3 +1,4 @@
+import os
 from enum import Enum
 
 '''
@@ -24,14 +25,14 @@ PARSE_LIST = [
         'urls': ['https://www.kuaidaili.com/free/inha/%s/' % n for n in range(1, 6)],
         'type': 'kuai_dai_li',
         'pattern': '//*[@id="list"]/table/tbody/tr',
-        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
+        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[3]'}
     },
     # 快代理：透明
     {
         'urls': ['https://www.kuaidaili.com/free/intr/%s/' % n for n in range(1, 6)],
         'type': 'kuai_dai_li',
         'pattern': '//*[@id="list"]/table/tbody/tr',
-        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[4]'}
+        'position': {'ip': './td[1]', 'port': './td[2]', 'city': './td[5]', 'type': './td[3]'}
     }
 ]
 
@@ -78,6 +79,13 @@ USER_AGENTS = [
 HTTP_TEST_IP = 'http://httpbin.org/ip'
 HTTPS_TEST_IP = 'https://httpbin.org/ip'
 REQUEST_TIME_OUT = 5
+
+MONGO_CONFIG = {
+    'ip': '127.0.0.1' if not os.getenv('ENV') else 'mongodb',
+    'port': 27017,
+    'db': 'proxy',
+    'collection': 'proxys'
+}
 
 
 class ParseType(Enum):
