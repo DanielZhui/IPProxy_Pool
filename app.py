@@ -5,7 +5,8 @@ from utils.validator import check_repeat_proxy
 
 from config import PARSE_LIST
 
-if __name__ == '__main__':
+
+def start():
     result_q = Queue()
     html_content_q = Queue()
     crawl = CrawlProxy()
@@ -22,3 +23,7 @@ if __name__ == '__main__':
     db_helper = MongoHelper()
     result = check_repeat_proxy(proxy_list)
     db_helper.insert_many(result)
+
+
+if __name__ == '__main__':
+    start()

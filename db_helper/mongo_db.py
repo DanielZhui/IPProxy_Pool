@@ -29,8 +29,8 @@ class MongoHelper(object):
         if condition and attr:
             self.collection.update_one(condition, {'$set': attr})
 
-    def find_all(self):
-        result = list(self.collection.find())
+    def find_all(self, condition=None):
+        result = list(self.collection.find(condition))
         self.serializer(result)
         return result
 
