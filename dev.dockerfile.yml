@@ -13,8 +13,6 @@ services:
     links:
       - mongodb
     entrypoint: /bin/bash -c "cd /code/web && python app.py"
-    networks:
-      - default
 
   mongodb:
     image: mongo:latest
@@ -24,9 +22,3 @@ services:
     ports:
       - "27017:27017"
     restart: always
-    networks:
-      - default
-
-networks:
-  default:
-    name: ip_proxy_network
