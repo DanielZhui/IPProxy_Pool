@@ -1,6 +1,8 @@
 import os
 import sys
 from flask import Flask, jsonify, render_template
+from flask_apscheduler import APScheduler
+
 from tem_filters.timer import format_time
 from util import get_find_options
 
@@ -30,4 +32,10 @@ def get_proxys():
 
 if __name__ == '__main__':
     from db_helper.mongo_db import MongoHelper
+    from conf import Config
+    app.config.from_object(Config)
+    scheduler = APScheduler()
+    scheduler.init_app(app)
+    scheduler.start()
+
     app.run()
