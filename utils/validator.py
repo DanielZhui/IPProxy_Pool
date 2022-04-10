@@ -3,6 +3,8 @@ import requests
 from time import time
 import config
 from utils.request import get_headers
+from db_helper.mongo_db import MongoHelper
+from web.util import get_find_options
 
 
 def check_proxy_list(self_ip, proxy_list):
@@ -60,8 +62,18 @@ def _check_proxy(self_ip, proxy, http=True):
 
 def check_repeat_proxy(proxy_list):
     proxy_set = set()
+    db_helper = MongoHelper()
+    find_options = get_find_options()
+    db_valid_dates = db_helper.find_all(find_options)
+    for data in db_valid_dates:
+        db_proxy = '{}:{}'.format(data.get('ip'), data.get('port'))
+        proxy_set.add(db_proxy)
     result = []
-    # 数据去重
+    '''
+    数据去重
+    1. 爬取到的数据入库前去重
+    2. 爬取到的数据与之前数据库中已存在的有效数据去重
+    '''
     for p in proxy_list:
         proxy = '{}:{}'.format(p.get('ip'), p.get('port'))
         if proxy not in proxy_set:
